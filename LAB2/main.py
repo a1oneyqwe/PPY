@@ -338,7 +338,7 @@ Extend the previous Python program to write the output to a file and perform ope
 """
 
 # Input
-input_numbers = input("Enter a series of space-separated integers: ")
+input_numbers = input("Enter numbers: ")
 
 # Convert Input
 
@@ -352,35 +352,36 @@ input_numbers = input("Enter a series of space-separated integers: ")
 
 # Type Conversion
 
-student_number = input("Enter your student number: ")
+student_number = input("Enter student number: ")
 
 # Write Output to File like this:
-    "Student Number: " + student_number
+with open("output.txt", "w") as file:
+    file.write("Student Number: " + student_number + "\n\n")
 
-    "Original List: " + str(numbers_list)
-    "Original Tuple: " + str(numbers_tuple)
-    "Original Set: " + str(numbers_set)
-    "Original Dictionary: " + str(numbers_dict)
+    file.write("Original List: " + str(numbers_list) + "\n")
+    file.write("Original Tuple: " + str(numbers_tuple) + "\n")
+    file.write("Original Set: " + str(numbers_set) + "\n")
+    file.write("Original Dictionary: " + str(numbers_dict) + "\n\n")
 
-    "Manipulated List: " + str(numbers_list)
-    "Manipulated Tuple: " + str(numbers_tuple)
-    "Union of Set: " + str(set_union)
-    "Intersection of Set: " + str(set_intersection)
-    "Difference of Set: " + str(set_difference)
-    "Updated Dictionary: " + str(numbers_dict)
+    file.write("Manipulated List: " + str(numbers_list) + "\n")
+    file.write("Manipulated Tuple: " + str(numbers_tuple) + "\n")
+    file.write("Union of Set: " + str(set_union) + "\n")
+    file.write("Intersection of Set: " + str(set_intersection) + "\n")
+    file.write("Difference of Set: " + str(set_difference) + "\n")
+    file.write("Updated Dictionary: " + str(numbers_dict) + "\n\n")
 
-    "List to Tuple: " + str(list_to_tuple)
-    "List to Set: " + str(list_to_set)
-    "List to Dictionary: " + str(list_to_dict)
-    "Tuple to List: " + str(tuple_to_list)
-    "Tuple to Set: " + str(tuple_to_set)
-    "Tuple to Dictionary: " + str(tuple_to_dict)
-    "Set to List: " + str(set_to_list)
-    "Set to Tuple: " + str(set_to_tuple)
-    "Set to Dictionary: " + str(set_to_dict)
-    "Dictionary to List: " + str(dict_to_list)
-    "Dictionary to Tuple: " + str(dict_to_tuple)
-    "Dictionary to Set: " + str(dict_to_set)
+    file.write("List to Tuple: " + str(list_to_tuple) + "\n")
+    file.write("List to Set: " + str(list_to_set) + "\n")
+    file.write("List to Dictionary: " + str(list_to_dict) + "\n")
+    file.write("Tuple to List: " + str(tuple_to_list) + "\n")
+    file.write("Tuple to Set: " + str(tuple_to_set) + "\n")
+    file.write("Tuple to Dictionary: " + str(tuple_to_dict) + "\n")
+    file.write("Set to List: " + str(set_to_list) + "\n")
+    file.write("Set to Tuple: " + str(set_to_tuple) + "\n")
+    file.write("Set to Dictionary: " + str(set_to_dict) + "\n")
+    file.write("Dictionary to List: " + str(dict_to_list) + "\n")
+    file.write("Dictionary to Tuple: " + str(dict_to_tuple) + "\n")
+    file.write("Dictionary to Set: " + str(dict_to_set) + "\n")
 
 # print "Content of the file:"
 
@@ -389,6 +390,7 @@ student_number = input("Enter your student number: ")
 #   Count the number of integers in the file
 #   Add all integers in the file (sum).
 #   Modify the content of the file
+
 
 """--------------------------------------------------------------------------------
 **Control Statements:**
@@ -453,3 +455,61 @@ These are fundamental constructs in Python programming that enable you to contro
 """10.
 In the final main.py file, leave the results from task 8 and 9, commit and push
 """
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+def find_largest_integer(filename):
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                if line.startswith('Largest prime number:'):
+                    return int(line.split(':')[-1].strip())
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return None
+
+def generate_prime_numbers(upper_limit):
+    primes = []
+    for num in range(2, upper_limit + 1):
+        if is_prime(num):
+            primes.append(num)
+    return primes
+
+def main():
+    output_filename = 'output.txt'
+    prime_numbers_filename = 'prime_numbers.txt'
+
+    largest_integer = find_largest_integer(output_filename)
+    if largest_integer is None:
+        return
+
+    prime_numbers = generate_prime_numbers(largest_integer)
+    prime_sum = sum(prime_numbers)
+    largest_prime = max(prime_numbers)
+    smallest_prime = min(prime_numbers)
+
+    print("List of prime numbers:", prime_numbers)
+    print("Sum of prime numbers:", prime_sum)
+    print("Largest prime number:", largest_prime)
+    print("Smallest prime number:", smallest_prime)
+    print("Is the largest integer itself prime?", is_prime(largest_integer))
+
+    with open(prime_numbers_filename, 'w') as file:
+        file.write(f"List of prime numbers: {prime_numbers}\n")
+        file.write(f"Sum of prime numbers: {prime_sum}\n")
+        file.write(f"Largest prime number: {largest_prime}\n")
+        file.write(f"Smallest prime number: {smallest_prime}\n")
+
+if __name__ == "__main__":
+    main()
