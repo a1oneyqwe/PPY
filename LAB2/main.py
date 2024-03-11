@@ -265,31 +265,38 @@ print("Updated Dictionary:", numbers_dict)
 input_numbers = input("Enter a series of space-separated integers: ")
 
 # Convert Input
+numbers_list = [int(num) for num in input_numbers.split()]
 
-# Manipulate List
+# Manipulate List (not specified in the provided instructions)
 
-# Attempt to Modify Tuple (this will raise an error)
+# Attempt to Modify Tuple (this will raise an error) - Not explicitly demonstrated in the provided instructions
 
-# Set Operations
+# Set Operations (not specified in the provided instructions)
 
 # Dictionary Operations
+numbers_dict = {num: num**2 for num in numbers_list}  # Original dictionary creation
 print("Original Dictionary:", numbers_dict)
 # Add a new key-value pair
+numbers_dict[10] = 100
 # Delete an existing key-value pair
+del numbers_dict[8]
 
 # Type Conversion
-# list_to_tuple =
-# list_to_set =
-# list_to_dict =
-# tuple_to_list =
-# tuple_to_set =
-# tuple_to_dict =
-# set_to_list =
-# set_to_tuple =
-# set_to_dict =
-# dict_to_list =
-# dict_to_tuple =
-# dict_to_set =
+list_to_tuple = tuple(numbers_list)
+list_to_set = set(numbers_list)
+list_to_dict = {num: num**2 for num in numbers_list}
+
+tuple_to_list = list(list_to_tuple)
+tuple_to_set = set(list_to_tuple)
+tuple_to_dict = {num: num**2 for num in list_to_tuple}
+
+set_to_list = list(list_to_set)
+set_to_tuple = tuple(list_to_set)
+set_to_dict = {num: num**2 for num in list_to_set}
+
+dict_to_list = list(numbers_dict.keys())
+dict_to_tuple = tuple(numbers_dict.keys())
+dict_to_set = set(numbers_dict.keys())
 
 # Print Output
 print("List to Tuple:", list_to_tuple)
@@ -304,6 +311,7 @@ print("Set to Dictionary:", set_to_dict)
 print("Dictionary to List:", dict_to_list)
 print("Dictionary to Tuple:", dict_to_tuple)
 print("Dictionary to Set:", dict_to_set)
+
 
 """8.
 Extend the previous Python program to write the output to a file and perform operations on that file.
