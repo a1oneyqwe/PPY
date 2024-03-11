@@ -511,5 +511,3 @@ def main():
         file.write(f"Largest prime number: {largest_prime}\n")
         file.write(f"Smallest prime number: {smallest_prime}\n")
 
-if __name__ == "__main__":
-    main()
